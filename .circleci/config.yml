@@ -25,5 +25,6 @@ jobs:
           name: run tests
           command: |          
             # Run tox
-            tox 
+            pip install tox
+            pytest
             
