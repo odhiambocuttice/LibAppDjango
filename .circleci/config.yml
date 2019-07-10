@@ -14,11 +14,11 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            pip3 install --upgrade pip
-            pip3 install virtualenv 
-            virtualenv --python=python3 myenv
+            pip install --upgrade setuptools
+            sudo apt-get install python3-venv
+            python3 -m venv myenv
             . myenv/bin/activate
-            pip3 install tox
+            pip install tox
             
       # Step 3: run linter and tests
       - run:
@@ -27,3 +27,8 @@ jobs:
             # Run tox
             tox
             
+            # pip3 install --upgrade pip
+            # pip3 install virtualenv 
+            # virtualenv --python=python3 myenv
+            # . myenv/bin/activate
+            # pip3 install tox
