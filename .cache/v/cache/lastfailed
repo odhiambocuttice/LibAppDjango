@@ -1,0 +1,5 @@
+{
+  "catalog/tests/test_forms.py": true, 
+  "catalog/tests/test_models.py": true, 
+  "catalog/tests/test_views.py": true
+}

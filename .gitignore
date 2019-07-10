@@ -1,0 +1,6 @@
+.tox/
+.cache/
+myenv/
+.pytest_cache/
+htmlcov/
+*.pyc
