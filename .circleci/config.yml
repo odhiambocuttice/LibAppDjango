@@ -25,6 +25,7 @@ jobs:
           name: run tests
           command: |          
             # Run tox
+            . myenv/bin/activate
             tox
             
             # pip3 install --upgrade pip
