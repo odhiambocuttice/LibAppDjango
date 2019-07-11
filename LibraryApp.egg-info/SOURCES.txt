@@ -7,7 +7,8 @@ LibraryApp.egg-info/SOURCES.txt
 LibraryApp.egg-info/dependency_links.txt
 LibraryApp.egg-info/requires.txt
 LibraryApp.egg-info/top_level.txt
-bin/docs_app
+bin/locallibrary_app
+catalog/__init__.py
 catalog/admin.py
 catalog/apps.py
 catalog/forms.py
@@ -18,6 +19,7 @@ catalog/urls.py
 catalog/views.py
 catalog/__pycache__/__init__.cpython-36.pyc
 catalog/__pycache__/admin.cpython-36.pyc
+catalog/__pycache__/apps.cpython-36.pyc
 catalog/__pycache__/forms.cpython-36.pyc
 catalog/__pycache__/models.cpython-36.pyc
 catalog/__pycache__/urls.cpython-36.pyc
