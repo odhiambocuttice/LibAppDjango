@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+recursive-include catalog/static *
+recursive-include templates *
+recursive-include catalog/templates *
+recursive-include catalog *
