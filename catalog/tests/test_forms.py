@@ -10,25 +10,27 @@ from catalog.forms import RenewBookForm
 class RenewBookFormTest(TestCase):
 
     def test_renew_form_date_in_past(self):
-        """Test form is invalid if renewal_date is before today."""
+        # If renewal date is before today, then form is invalid. Test this
+        # set date of previous day (ikue jana)
         date = datetime.date.today() - datetime.timedelta(days=1)
         form = RenewBookForm(data={'renewal_date': date})
+        # Confirm that this test fails
         self.assertFalse(form.is_valid())
 
     def test_renew_form_date_too_far_in_future(self):
-        """Test form is invalid if renewal_date more than 4 weeks from today."""
+        # Test that if a renewal data is too far in the future, it shouldnt go through
         date = datetime.date.today() + datetime.timedelta(weeks=4) + datetime.timedelta(days=1)
         form = RenewBookForm(data={'renewal_date': date})
         self.assertFalse(form.is_valid())
 
     def test_renew_form_date_today(self):
-        """Test form is valid if renewal_date is today."""
+        # If renewal date is today, then thats fine.
         date = datetime.date.today()
         form = RenewBookForm(data={'renewal_date': date})
         self.assertTrue(form.is_valid())
 
     def test_renew_form_date_max(self):
-        """Test form is valid if renewal_date is within 4 weeks."""
+        # If renewal date is within four weeks, form is okay
         date = datetime.date.today() + datetime.timedelta(weeks=4)
         form = RenewBookForm(data={'renewal_date': date})
         self.assertTrue(form.is_valid())

@@ -9,29 +9,28 @@ from django.contrib.auth.models import User  # Required to assign User as a borr
 
 
 class Genre(models.Model):
-    """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
+    # This model represents book genre.
     name = models.CharField(
         max_length=200,
         help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)"
         )
 
     def __str__(self):
-        """String for representing the Model object (in Admin site etc.)"""
+        # Gets friendly name of object
         return self.name
 
 
 class Language(models.Model):
-    """Model representing a Language (e.g. English, French, Japanese, etc.)"""
+    # Model that represents a language
     name = models.CharField(max_length=200,
                             help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
 
     def __str__(self):
-        """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
 
 class Book(models.Model):
-    """Model representing a book (but not a specific copy of a book)."""
+    # Model representing a book
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     # Foreign Key used because book can only have one author, but authors can have multiple books
@@ -63,7 +62,7 @@ class Book(models.Model):
 
 
 class BookInstance(models.Model):
-    """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    # Unlike book model, this one represents specific instance of a book
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for this particular book across whole library")
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
@@ -101,7 +100,7 @@ class BookInstance(models.Model):
 
 
 class Author(models.Model):
-    """Model representing an author."""
+    # Model representing an author
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
