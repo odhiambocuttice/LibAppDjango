@@ -1,0 +1,26 @@
+Metadata-Version: 1.1
+Name: LibraryApp
+Version: 1.0.4
+Summary: A simple django library app 
+Home-page: UNKNOWN
+Author: kevin
+Author-email: kevin@kev.com
+License: BSD License
+Description: ===========
+        Library App
+        ===========
+        
+        Simple django library app
+        
+            
+        
+        Quick start
+        =========
+        
+        Just run: python3 manage.py runserver
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.1
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
