@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
@@ -35,4 +36,9 @@ urlpatterns += [
     path('book/create/', views.BookCreate.as_view(), name='book_create'),
     path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book_update'),
     path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book_delete'),
+]
+
+urlpatterns += [
+    path('catalog/', views.BookList.as_view()),
+    path('catalog/<int:pk>/', views.BookDetail.as_view()),
 ]
