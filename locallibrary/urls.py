@@ -21,6 +21,8 @@ from django.urls import path
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
+from catalog.views import BookViewSet
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

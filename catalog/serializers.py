@@ -1,6 +1,6 @@
 # snippets/serializers
 from rest_framework import serializers
-from .models import Book
+from .models import Book, Author
 
 class BookSerializer(serializers.ModelSerializer):
 
@@ -8,3 +8,10 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ('title', 'author', 'summary', 'isbn',
                   'genre', 'language', )
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Author
+        fields = ('first_name', 'last_name', )
