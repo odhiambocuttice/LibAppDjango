@@ -21,15 +21,20 @@ from django.urls import path
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
+from catalog.views import BookViewSet, AuthorViewSet
+from django.contrib.auth.models import User
+from catalog.models import Book
+from rest_framework import routers
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
     path('',RedirectView.as_view(url='/catalog/', permanent=True)),
+     path('accounts/', include('django.contrib.auth.urls')),
     #Add URL maps to redirect the base URL to our application
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-#Add Django site authentication urls (for login, logout, password management)
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-]
+
+

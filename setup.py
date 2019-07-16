@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='LibraryApp',
-    version='1.0.6',
+    version='1.0.9',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',  # example license
@@ -29,6 +29,7 @@ setup(
         'Django==2.2.2',
         'pytest-django==3.5.0',
         'django-pytest==0.2.0',
+        'djangorestframework==3.9.4'
         
     ],
     scripts=[

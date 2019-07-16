@@ -52,10 +52,7 @@ class AuthorModelTest(TestCase):
 
         self.assertEqual(expected_object_name, str(author))
 
-    def test_get_absolute_url(self):
-        author = Author.objects.get(id=1)
-        # This will also fail if the urlconf is not defined.
-        self.assertEqual(author.get_absolute_url(), '/catalog/author/1')
+    
 
 
 
@@ -68,10 +65,6 @@ class BookModelTest(TestCase):
         title = Book.objects.get(id=1)
         field_label = title._meta.get_field('title').verbose_name
         self.assertEqual(field_label, 'title')
-
-    def test_get_absolute_url(self):
-        book = Book.objects.get(id=1)
-        self.assertEqual(book.get_absolute_url(), '/catalog/book/1')
 
     def test_isbn_label(self):
         isbn = Book.objects.get(id=1)

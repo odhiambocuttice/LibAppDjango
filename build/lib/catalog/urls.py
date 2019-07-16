@@ -1,5 +1,14 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
+
+from django.contrib.auth.models import User
+from catalog.models import Book
+from rest_framework import routers
+
+from catalog.views import BookViewSet, AuthorViewSet
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -13,7 +22,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
-    path(r'borrowed/', views.LoanedBooksAllListView.as_view(), name='all-borrowed'),  # Added for challenge
+    path(r'borrowed/', views.LoanedBooksAllListView.as_view(), name='all-borrowed'),
 ]
 
 urlpatterns += [   
@@ -36,3 +45,15 @@ urlpatterns += [
     path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book_update'),
     path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book_delete'),
 ]
+
+router = routers.DefaultRouter()
+router.register(r'api/books', views.BookViewSet)
+router.register(r'api/authors', views.AuthorViewSet)
+
+urlpatterns += [
+    path('', include(router.urls)),    
+    path(r'api/', include('rest_framework.urls', namespace='rest_framework'))
+
+]
+
+
