@@ -26,6 +26,6 @@ jobs:
           command: |          
             # Run tox
             . myenv/bin/activate
-            tox
+            tox --recreate -e py3
             
            

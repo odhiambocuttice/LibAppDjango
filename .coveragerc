@@ -1,2 +1,2 @@
 [run]
-omit = myenv/*
+omit = /home/kevin/Documents/DjangoLibraryApp/myenv/*
