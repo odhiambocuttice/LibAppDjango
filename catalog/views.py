@@ -17,10 +17,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
-
-
-
-
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
