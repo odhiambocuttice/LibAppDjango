@@ -16,7 +16,8 @@ class AuthorModelTest(TestCase):
     def test_first_name_label(self):
         # Get the author object to test
         author = Author.objects.get(id=1)
-        # Get the metadata for the required field and use it to query the required field data
+        # Get the metadata for the required field
+        # and use it to query the required field data
         field_label = author._meta.get_field('first_name').verbose_name
         # Compare the value to the expected result
         self.assertEqual(field_label, 'first name')
@@ -48,12 +49,10 @@ class AuthorModelTest(TestCase):
 
     def test_object_name_is_last_name_comma_first_name(self):
         author = Author.objects.get(id=1)
-        expected_object_name = '{0}, {1}'.format(author.last_name, author.first_name)
+        expected_object_name = '{0}, {1}'.format(
+            author.last_name, author.first_name)
 
         self.assertEqual(expected_object_name, str(author))
-
-    
-
 
 
 class BookModelTest(TestCase):
@@ -69,15 +68,15 @@ class BookModelTest(TestCase):
     def test_isbn_label(self):
         isbn = Book.objects.get(id=1)
         field_label = isbn._meta.get_field('isbn').verbose_name
-        self.assertEqual(field_label,'ISBN')
+        self.assertEqual(field_label, 'ISBN')
 
 
 class LanguageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Language.objects.create(name = 'Klingon')
+        Language.objects.create(name='Klingon')
 
     def test_language_label(self):
         name = Language.objects.get(id=1)
         field_label = name._meta.get_field('name').verbose_name
-        self.assertEqual(field_label,'name')
+        self.assertEqual(field_label, 'name')

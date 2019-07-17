@@ -1,2 +1,5 @@
+# .coveragerc to control coverage.py
+
 [run]
 omit = /home/kevin/Documents/DjangoLibraryApp/myenv/*
+# branch = True  # run the coverage with branch analysis

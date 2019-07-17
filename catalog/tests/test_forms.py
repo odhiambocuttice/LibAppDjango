@@ -18,8 +18,10 @@ class RenewBookFormTest(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_renew_form_date_too_far_in_future(self):
-        # Test that if a renewal data is too far in the future, it shouldnt go through
-        date = datetime.date.today() + datetime.timedelta(weeks=4) + datetime.timedelta(days=1)
+        # Test that if a renewal data is too
+        # far in the future, it shouldnt go through
+        date = datetime.date.today() + datetime.timedelta(
+            weeks=4) + datetime.timedelta(days=1)
         form = RenewBookForm(data={'renewal_date': date})
         self.assertFalse(form.is_valid())
 
