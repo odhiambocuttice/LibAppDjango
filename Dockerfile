@@ -1,3 +1,4 @@
+# Define your app’s environment with a Dockerfile so it can be reproduced anywhere.
 # Python version
 FROM python:3.7-alpine
 
