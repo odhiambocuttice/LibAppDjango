@@ -1,7 +1,7 @@
 import os
 from setuptools import find_packages, setup
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
@@ -12,7 +12,7 @@ setup(
     version='1.0.9',
     packages=find_packages(),
     include_package_data=True,
-    license='BSD License',  # example license
+    license='MIT License',
     description='A simple django library app ',
     long_description=README,
     author='kevin',
@@ -20,12 +20,13 @@ setup(
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django :: 2.1',
-        'Framework :: Django :: 2.2',  
+        'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
 
     ],
     install_requires=[
+        # Should only have the most basic 
         'Django==2.2.2',
         'djangorestframework==3.9.4'
         
