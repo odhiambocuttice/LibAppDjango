@@ -94,14 +94,14 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
                                         borrower=the_borrower, status=status)
 
     def test_redirect_if_not_logged_in(self):
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
         self.assertRedirects(
             response, '/accounts/login/?next=/catalog/mybooks/')
 
     def test_logged_in_uses_correct_template(self):
         self.client.login(
             username='testuser1', password='1X<ISRUkw+tuK')
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
 
         # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'testuser1')
@@ -115,7 +115,7 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
     def test_only_borrowed_books_in_list(self):
         self.client.login(
             username='testuser1', password='1X<ISRUkw+tuK')
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
 
         # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'testuser1')
@@ -134,7 +134,7 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
             copy.save()
 
         # Check that now we have borrowed books in the list
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
         # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'testuser1')
         # Check that we got a response "success"
@@ -157,7 +157,7 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
 
         self.client.login(
             username='testuser1', password='1X<ISRUkw+tuK')
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
 
         # # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'testuser1')
@@ -177,7 +177,7 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
 
         self.client.login(
             username='testuser1', password='1X<ISRUkw+tuK')
-        response = self.client.get(reverse('my-borrowed'))
+        response = self.client.get(reverse('my_borrowed'))
 
         # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'testuser1')
@@ -326,14 +326,15 @@ class RenewBookInstancesViewTest(TestCase):
             'Invalid date - more than 4 weeks ahead')
 
     def test_redirects_to_all_borrowed_book_list_on_success(self):
-        self.client.login(
-            username='testuser2', password='2HJ1vRV0Z&3iD')
-        valid_date_in_future = datetime.date.today()
-        + datetime.timedelta(weeks=2)
-        response = self.client.post(reverse(
-            'renew-book-librarian', kwargs={'pk': self.test_bookinstance1.pk}),
-                                    {'renewal_date': valid_date_in_future})
-        self.assertRedirects(response, reverse('all-borrowed'))
+        self.client.login(username='testuser2', password='2HJ1vRV0Z&3iD')
+        valid_date_in_future = datetime.date.today(
+                                        ) + datetime.timedelta(weeks=2)
+        response = self.client.post(
+            reverse(
+                'renew-book-librarian', kwargs={
+                    'pk': self.test_bookinstance1.pk}), {
+                        'renewal_date': valid_date_in_future})
+        self.assertRedirects(response, reverse('all_borrowed'))
 
     def test_HTTP404_for_invalid_book_if_logged_in(self):
         import uuid
@@ -346,7 +347,6 @@ class RenewBookInstancesViewTest(TestCase):
 
 
 class AuthorCreateViewTest(TestCase):
-    """Test case for the AuthorCreate view (Created as Challenge)."""
 
     def setUp(self):
         # Create a user

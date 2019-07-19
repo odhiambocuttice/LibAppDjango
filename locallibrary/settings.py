@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+# pg 96
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# We do this to avoid hardcoding file paths.
+# To fix the path issue, we dynamically set a project root variable intuitively named BASE DIR at the
+# top of the base settings module. Since BASE DIR is determined in relation to the location of base.py,
+# your project can be run from any location on any development computer or server.
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -29,7 +35,7 @@ ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
 
 
 # Application definition
-
+# the list of Django apps used by a given project
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

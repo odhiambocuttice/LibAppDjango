@@ -19,16 +19,14 @@ setup(
     author_email='kevin@kev.com',
     classifiers=[
         'Environment :: Web Environment',
-        'Framework :: Django',
-        'Framework :: Django :: 2.1',  
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',  
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
 
     ],
     install_requires=[
         'Django==2.2.2',
-        'pytest-django==3.5.0',
-        'django-pytest==0.2.0',
         'djangorestframework==3.9.4'
         
     ],

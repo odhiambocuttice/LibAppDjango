@@ -2,27 +2,27 @@ from django.urls import path, include
 from rest_framework import routers
 from . import views
 
-
+# pg47 Use Underscores in URL Pattern Names Rather Than Dashes
 urlpatterns = [
     path('', views.index, name='index'),
     path('books/', views.BookListView.as_view(), name='books'),
-    path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
+    path('book/<int:pk>', views.BookDetailView.as_view(), name='book_detail'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('author/<int:pk>',
-         views.AuthorDetailView.as_view(), name='author-detail'),
+         views.AuthorDetailView.as_view(), name='author_detail'),
 
 ]
 
 urlpatterns += [
     path('mybooks/', views.LoanedBooksByUserListView.as_view(),
-         name='my-borrowed'),
-    path(r'borrowed/', views.LoanedBooksAllListView.as_view(),
-         name='all-borrowed'),
+         name='my_borrowed'),
+    path('borrowed/', views.LoanedBooksAllListView.as_view(),
+         name='all_borrowed'),
 ]
 
 urlpatterns += [
     path('mybooks/', views.LoanedBooksByUserListView.as_view(),
-         name='my-borrowed'),
+         name='my_borrowed'),
 ]
 
 urlpatterns += [
@@ -49,11 +49,11 @@ urlpatterns += [
 ]
 
 router = routers.DefaultRouter()
-router.register(r'api/books', views.BookViewSet)
-router.register(r'api/authors', views.AuthorViewSet)
+router.register('api/books', views.BookViewSet)
+router.register('api/authors', views.AuthorViewSet)
 
 urlpatterns += [
     path('', include(router.urls)),
-    path(r'api/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]

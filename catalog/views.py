@@ -1,9 +1,11 @@
 # from django.shortcuts import render
 
-# # Create your views here.
+# Create your views here.
 from django.shortcuts import render
-from catalog.serializers import BookSerializer, AuthorSerializer
-from catalog.models import Book
+# pg 43, use explicit relative imports
+# instead of {from catalog.serializers import BookSerializer, AuthorSerializer}
+from .serializers import BookSerializer, AuthorSerializer
+from .models import Book
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Author
@@ -15,7 +17,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from django.contrib.auth.decorators import permission_required
-from catalog.forms import RenewBookForm
+from .forms import RenewBookForm
 from rest_framework import viewsets
 from .models import BookInstance
 
@@ -122,7 +124,7 @@ def renew_book_librarian(request, pk):
             book_instance.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('all-borrowed'))
+            return HttpResponseRedirect(reverse('all_borrowed'))
 
     # If this is a GET (or any other method) create the default form
     else:

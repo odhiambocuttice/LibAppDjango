@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+# pg 102 max of 5 models per app
 
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 import uuid  # Required for unique book instances
