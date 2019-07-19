@@ -35,6 +35,7 @@ urlpatterns = [
 # if your STATIC_URL is defined as /static/,
 # you can add the above snippet
 
-# You don't need to run staticfiles when you're running a development server and DEBUG is set to True.
+# You don't need to run staticfiles when you're
+# running a development server and DEBUG is set to True.
 
 # Static and media files can be then served directly via the web process
