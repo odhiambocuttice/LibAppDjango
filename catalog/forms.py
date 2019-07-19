@@ -4,6 +4,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+# we need forms to accept user input from visitors
+
 
 class RenewBookForm(forms.Form):
     """Form for a librarian to renew books."""
