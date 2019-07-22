@@ -9,6 +9,10 @@ from catalog.models import Language
 
 class AuthorModelTest(TestCase):
     # Setup test data, then test author labels.
+
+    # at class method is a method that is bound to a 
+    # class rather than its object. It doesn't require 
+    # creation of a class instance
     @classmethod
     def setUpTestData(cls):
         Author.objects.create(first_name='Kevin', last_name='Kithinji')

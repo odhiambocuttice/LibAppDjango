@@ -78,6 +78,9 @@ class BookInstance(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL,
                                  null=True, blank=True)
 
+    # this is built in function that turns the is_overdue
+    # method into a getter for a read only attribute with 
+    # the same name, you can now use @is_overdue.setter
     @property
     def is_overdue(self):
         if self.due_back and date.today() > self.due_back:
