@@ -9,8 +9,7 @@ class FeedbackForm(forms.Form):
     honeypot = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def send_email(self):
-        # try to trick spammers by checking whether the honeypot field is
-        # filled in; not super complicated/effective but it works
+        # interesting way to check for spambots
         if self.cleaned_data['honeypot']:
             return False
         # the below function processes and sends the feedback email in the background as the user continues to use the site.

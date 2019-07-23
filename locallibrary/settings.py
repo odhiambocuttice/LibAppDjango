@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'feedback',
 ]
 
+
+
 # Middleware is a framework of hooks into Django’s request/response processing. 
 # It’s a light, low-level “plugin” system for globally altering Django’s input or output.
 # Each middleware component is responsible for doing some specific function
@@ -210,3 +212,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 DEFAULT_FROM_EMAIL = 'locallibrary <locallibrary@example.com>'
+
