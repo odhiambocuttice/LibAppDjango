@@ -79,7 +79,7 @@ class BookInstance(models.Model):
                                  null=True, blank=True)
 
     # this is built in function that turns the is_overdue
-    # method into a getter for a read only attribute with 
+    # method into a getter for a read only attribute with
     # the same name, you can now use @is_overdue.setter
     @property
     def is_overdue(self):

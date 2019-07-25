@@ -26,10 +26,10 @@ setup(
 
     ],
     install_requires=[
-        # Should only have the most basic 
+        # Should only have the most basic
         'Django==2.2.2',
         'djangorestframework==3.9.4'
-        
+
     ],
     scripts=[
         "bin/locallibrary_app"

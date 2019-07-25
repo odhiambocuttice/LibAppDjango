@@ -1,21 +1,27 @@
 from django.test import TestCase
-
-# Create your tests here.
-
+from django.urls import reverse
+import datetime
+from django.utils import timezone
 from catalog.models import Author
 from catalog.models import Book
 from catalog.models import Language
+from catalog.models import Genre
+from catalog.models import BookInstance
+from datetime import date
 
 
 class AuthorModelTest(TestCase):
     # Setup test data, then test author labels.
 
-    # at class method is a method that is bound to a 
-    # class rather than its object. It doesn't require 
-    # creation of a class instance
+    # This decorator will allow us to call that method
+    # using the class name instead of the object.
+    # In below example, the setUpTestData has one parameter
+    # cls, which refers to the AuthorModelTest class.
+    # now we can call the setUpTestData method using
+    # AuthorModelTest.setUpTestData()
     @classmethod
     def setUpTestData(cls):
-        Author.objects.create(first_name='Kevin', last_name='Kithinji')
+        Author.objects.create(first_name='Kevin', last_name='Kithinji', id=1)
 
     def test_first_name_label(self):
         # Get the author object to test
@@ -62,9 +68,18 @@ class AuthorModelTest(TestCase):
 class BookModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Book.objects.create(title='TestyBook', isbn='872727727')
+        Author.objects.create(first_name='Mr', last_name='Testy', id=1)
+        author = Author.objects.get(id=1)
+        Language.objects.create(name='Klingon')
+        testLang = Language.objects.get(id=1)
+        Book.objects.create(title='TestyBook', author=author,
+                            summary='testysummary', isbn='872727727',
+                                    language=testLang)
+        title = Book.objects.get(id=1)
+        BookInstance.objects.create(book=title, imprint='testimprint',
+                                    id=1)
 
-    def test_book_name_label(self):
+    def test_book_title_label(self):
         title = Book.objects.get(id=1)
         field_label = title._meta.get_field('title').verbose_name
         self.assertEqual(field_label, 'title')
@@ -74,13 +89,84 @@ class BookModelTest(TestCase):
         field_label = isbn._meta.get_field('isbn').verbose_name
         self.assertEqual(field_label, 'ISBN')
 
+    def test_author_name_label(self):
+        author = Book.objects.get(id=1)
+        field_label = author._meta.get_field('author').verbose_name
+        self.assertEqual(field_label, 'author')
+
+    def test_language_name_label(self):
+        language = Book.objects.get(id=1)
+        field_label = language._meta.get_field('language').verbose_name
+        self.assertEqual(field_label, 'language')
+
+    def test_str_is_equal_to_name(self):
+        example = Book.objects.get(pk=1)
+        self.assertEqual(str(example), example.title)
+
+    def test_get_absolute_url(self):
+        example_book = BookInstance.objects.get(id=1)
+        url = reverse('book-detail', args=(example_book.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+
+class test_book_instance(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Author.objects.create(first_name='Mr', last_name='Testy', id=1)
+        author = Author.objects.get(id=1)
+        Language.objects.create(name='Klingon', id=1)
+        testLang = Language.objects.get(id=1)
+        Book.objects.create(title='TestyBook', author=author,
+                            summary='testysummary', isbn='872727727',
+                                    language=testLang, id=1)
+        title = Book.objects.get(id=1)
+        time = timezone.now() + datetime.timedelta(days=30)
+        time_2 = timezone.now() - datetime.timedelta(days=30)
+        BookInstance.objects.create(book=title, imprint='testimprint',
+                                    due_back=time, id=1)
+        BookInstance.objects.create(book=title, imprint='testimprint',
+                                    due_back=time_2, id=2)
+
+    def test_book_isnt_overdue(self):
+        book_instance = BookInstance.objects.get(id=1)
+        isnt_due = book_instance.due_back and date.today(
+        ) > book_instance.due_back
+        self.assertIs(isnt_due, False)
+
+    def test_book_is_overdue(self):
+        book_instance = BookInstance.objects.get(id=2)
+        is_due = book_instance.due_back and date.today(
+        ) > book_instance.due_back
+        self.assertIs(is_due, True)
+
+    def test_str_is_equal_to_name(self):
+        example = BookInstance.objects.get(id=1)
+        expected_object_name = '{0} ({1})'.format(
+            example.id, example.book.title)
+        self.assertEqual(expected_object_name, str(example))
+
 
 class LanguageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Language.objects.create(name='Klingon')
+        Language.objects.create(name='Klingon', id=1)
 
     def test_language_label(self):
         name = Language.objects.get(id=1)
         field_label = name._meta.get_field('name').verbose_name
         self.assertEqual(field_label, 'name')
+
+    def test_str_is_equal_to_name(self):
+        example = Language.objects.get(pk=1)
+        self.assertEqual(str(example), example.name)
+
+
+class GenreModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Genre.objects.create(name='retro', id=1)
+
+    def test_genre_label(self):
+        example = Genre.objects.get(id=1)
+        self.assertEqual(str(example), ', '.join([example.name for example in example.genre.all()[:3]])
