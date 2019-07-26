@@ -1,7 +1,7 @@
 [run]
 branch = True 
 omit = /home/kevin/Documents/LibraryApp/LibAppDjango/myenv/*
- 
+       
 [report]
 # lines to exclude from consideration
 exclude_lines =

@@ -14,8 +14,7 @@ class Genre(models.Model):
     # This model represents book genre.
     name = models.CharField(
         max_length=200,
-        help_text="Enter a book genre (e.g. Science Fiction etc.)"
-        )
+        help_text="Enter a book genre (e.g. Science Fiction etc.)")
 
     def __str__(self):
         # Gets friendly name of object

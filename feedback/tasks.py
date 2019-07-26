@@ -14,7 +14,8 @@ def send_feedback_email_task(email, message):
     return send_feedback_email(email, message)
 
 
-@periodic_task(run_every=(crontab(minute='*/1')), name="sendperiodic_email", ignore_result=True)
+@periodic_task(run_every=(
+    crontab(minute='*/1')), name="sendperiodic_email", ignore_result=True)
 def send_periodic_email_task():
     logger.info("Sent periodic email")
     send_feedback_email()

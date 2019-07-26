@@ -1,13 +1,12 @@
-from django.test import TestCase
-from django.urls import reverse
 import datetime
 from django.utils import timezone
 from catalog.models import Author
+from django.urls import reverse
 from catalog.models import Book
 from catalog.models import Language
-from catalog.models import Genre
 from catalog.models import BookInstance
 from datetime import date
+from django.test import TestCase
 
 
 class AuthorModelTest(TestCase):
@@ -160,13 +159,3 @@ class LanguageModelTest(TestCase):
     def test_str_is_equal_to_name(self):
         example = Language.objects.get(pk=1)
         self.assertEqual(str(example), example.name)
-
-
-class GenreModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Genre.objects.create(name='retro', id=1)
-
-    def test_genre_label(self):
-        example = Genre.objects.get(id=1)
-        self.assertEqual(str(example), ', '.join([example.name for example in example.genre.all()[:3]])

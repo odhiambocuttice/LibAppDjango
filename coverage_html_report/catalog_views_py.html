@@ -296,7 +296,7 @@
 <p id="t44" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t45" class="pln">    <span class="com"># Number of visits to this view, as counted in the session variable.</span><span class="strut">&nbsp;</span></p>
 <p id="t46" class="stm mis">    <span class="nam">num_visits</span> <span class="op">=</span> <span class="nam">request</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">'num_visits'</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t47" class="stm mis">    <span class="nam">request</span><span class="op">.</span><span class="nam">session</span><span class="op">[</span><span class="str">'num_visits'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">num_visits</span><span class="op">+</span><span class="num">1</span><span class="strut">&nbsp;</span></p>
+<p id="t47" class="stm mis">    <span class="nam">request</span><span class="op">.</span><span class="nam">session</span><span class="op">[</span><span class="str">'num_visits'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">num_visits</span> <span class="op">+</span> <span class="num">1</span><span class="strut">&nbsp;</span></p>
 <p id="t48" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t49" class="pln">    <span class="com"># Render the HTML template index.html</span><span class="strut">&nbsp;</span></p>
 <p id="t50" class="pln">    <span class="com"># with the data in the context variable.</span><span class="strut">&nbsp;</span></p>
@@ -340,7 +340,7 @@
 <p id="t88" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t89" class="stm run hide_run">    <span class="key">def</span> <span class="nam">get_queryset</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t90" class="stm run hide_run">        <span class="key">return</span> <span class="nam">BookInstance</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="nam">borrower</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">request</span><span class="op">.</span><span class="nam">user</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
-<p id="t91" class="pln">                <span class="nam">status__exact</span><span class="op">=</span><span class="str">'o'</span><span class="op">)</span><span class="op">.</span><span class="nam">order_by</span><span class="op">(</span><span class="str">'due_back'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t91" class="pln">            <span class="nam">status__exact</span><span class="op">=</span><span class="str">'o'</span><span class="op">)</span><span class="op">.</span><span class="nam">order_by</span><span class="op">(</span><span class="str">'due_back'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t92" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t93" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t94" class="stm run hide_run"><span class="key">class</span> <span class="nam">LoanedBooksAllListView</span><span class="op">(</span><span class="nam">PermissionRequiredMixin</span><span class="op">,</span> <span class="nam">generic</span><span class="op">.</span><span class="nam">ListView</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
@@ -438,7 +438,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-25 17:05
+            created at 2019-07-26 18:06
         </p>
     </div>
 </div>

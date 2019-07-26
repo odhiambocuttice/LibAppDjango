@@ -44,7 +44,7 @@ def index(request):
 
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
+    request.session['num_visits'] = num_visits + 1
 
     # Render the HTML template index.html
     # with the data in the context variable.
@@ -88,7 +88,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(borrower=self.request.user).filter(
-                status__exact='o').order_by('due_back')
+            status__exact='o').order_by('due_back')
 
 
 class LoanedBooksAllListView(PermissionRequiredMixin, generic.ListView):

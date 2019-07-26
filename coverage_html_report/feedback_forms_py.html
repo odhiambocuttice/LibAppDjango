@@ -84,8 +84,9 @@
 <p id="n13" class="stm mis"><a href="#n13">13</a></p>
 <p id="n14" class="stm mis"><a href="#n14">14</a></p>
 <p id="n15" class="pln"><a href="#n15">15</a></p>
-<p id="n16" class="stm mis"><a href="#n16">16</a></p>
-<p id="n17" class="pln"><a href="#n17">17</a></p>
+<p id="n16" class="pln"><a href="#n16">16</a></p>
+<p id="n17" class="stm mis"><a href="#n17">17</a></p>
+<p id="n18" class="pln"><a href="#n18">18</a></p>
 
             </td>
             <td class="text">
@@ -103,9 +104,10 @@
 <p id="t12" class="pln">        <span class="com"># interesting way to check for spambots</span><span class="strut">&nbsp;</span></p>
 <p id="t13" class="stm mis">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">cleaned_data</span><span class="op">[</span><span class="str">'honeypot'</span><span class="op">]</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t14" class="stm mis">            <span class="key">return</span> <span class="key">False</span><span class="strut">&nbsp;</span></p>
-<p id="t15" class="pln">        <span class="com"># the below function processes and sends the feedback email in the background as the user continues to use the site.</span><span class="strut">&nbsp;</span></p>
-<p id="t16" class="stm mis">        <span class="nam">send_feedback_email_task</span><span class="op">.</span><span class="nam">delay</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
-<p id="t17" class="pln">            <span class="nam">self</span><span class="op">.</span><span class="nam">cleaned_data</span><span class="op">[</span><span class="str">'email'</span><span class="op">]</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">cleaned_data</span><span class="op">[</span><span class="str">'message'</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t15" class="pln">        <span class="com"># the below function processes and sends the feedback</span><span class="strut">&nbsp;</span></p>
+<p id="t16" class="pln">        <span class="com"># email in the background as the user continues to use the site.</span><span class="strut">&nbsp;</span></p>
+<p id="t17" class="stm mis">        <span class="nam">send_feedback_email_task</span><span class="op">.</span><span class="nam">delay</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
+<p id="t18" class="pln">            <span class="nam">self</span><span class="op">.</span><span class="nam">cleaned_data</span><span class="op">[</span><span class="str">'email'</span><span class="op">]</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">cleaned_data</span><span class="op">[</span><span class="str">'message'</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -116,7 +118,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-25 16:07
+            created at 2019-07-26 18:06
         </p>
     </div>
 </div>

@@ -87,8 +87,9 @@
 <p id="n16" class="pln"><a href="#n16">16</a></p>
 <p id="n17" class="stm run hide_run"><a href="#n17">17</a></p>
 <p id="n18" class="pln"><a href="#n18">18</a></p>
-<p id="n19" class="stm mis"><a href="#n19">19</a></p>
+<p id="n19" class="pln"><a href="#n19">19</a></p>
 <p id="n20" class="stm mis"><a href="#n20">20</a></p>
+<p id="n21" class="stm mis"><a href="#n21">21</a></p>
 
             </td>
             <td class="text">
@@ -108,10 +109,11 @@
 <p id="t14" class="stm mis">    <span class="key">return</span> <span class="nam">send_feedback_email</span><span class="op">(</span><span class="nam">email</span><span class="op">,</span> <span class="nam">message</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t15" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t16" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t17" class="stm run hide_run"><span class="op">@</span><span class="nam">periodic_task</span><span class="op">(</span><span class="nam">run_every</span><span class="op">=</span><span class="op">(</span><span class="nam">crontab</span><span class="op">(</span><span class="nam">minute</span><span class="op">=</span><span class="str">'*/1'</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">"sendperiodic_email"</span><span class="op">,</span> <span class="nam">ignore_result</span><span class="op">=</span><span class="key">True</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t18" class="pln"><span class="key">def</span> <span class="nam">send_periodic_email_task</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t19" class="stm mis">    <span class="nam">logger</span><span class="op">.</span><span class="nam">info</span><span class="op">(</span><span class="str">"Sent periodic email"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t20" class="stm mis">    <span class="nam">send_feedback_email</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t17" class="stm run hide_run"><span class="op">@</span><span class="nam">periodic_task</span><span class="op">(</span><span class="nam">run_every</span><span class="op">=</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
+<p id="t18" class="pln">    <span class="nam">crontab</span><span class="op">(</span><span class="nam">minute</span><span class="op">=</span><span class="str">'*/1'</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">"sendperiodic_email"</span><span class="op">,</span> <span class="nam">ignore_result</span><span class="op">=</span><span class="key">True</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t19" class="pln"><span class="key">def</span> <span class="nam">send_periodic_email_task</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t20" class="stm mis">    <span class="nam">logger</span><span class="op">.</span><span class="nam">info</span><span class="op">(</span><span class="str">"Sent periodic email"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t21" class="stm mis">    <span class="nam">send_feedback_email</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -122,7 +124,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-25 16:07
+            created at 2019-07-26 18:06
         </p>
     </div>
 </div>

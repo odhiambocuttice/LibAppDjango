@@ -21,9 +21,9 @@ def send_feedback_email(email, message):
 
 
 def send_periodic_email():
-    # send_mail(subject, message, from_email, 
-    # recipient_list, fail_silently=False, 
-    # auth_user=None, auth_password=None, 
+    # send_mail(subject, message, from_email,
+    # recipient_list, fail_silently=False,
+    # auth_user=None, auth_password=None,
     # connection=None, html_message=None)
     send_mail(
         'Did you get this subject',  # subject

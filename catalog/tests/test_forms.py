@@ -41,8 +41,8 @@ class RenewBookFormTest(TestCase):
         """Test renewal_date label is 'renewal date'."""
         form = RenewBookForm()
         self.assertTrue(
-            form.fields['renewal_date'].label is None or
-            form.fields['renewal_date'].label == 'renewal date')
+            form.fields['renewal_date'].label is None or form.fields[
+                'renewal_date'].label == 'renewal date')
 
     def test_renew_form_date_field_help_text(self):
         """Test renewal_date help_text is as expected."""

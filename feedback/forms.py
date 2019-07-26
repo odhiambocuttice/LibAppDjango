@@ -12,6 +12,7 @@ class FeedbackForm(forms.Form):
         # interesting way to check for spambots
         if self.cleaned_data['honeypot']:
             return False
-        # the below function processes and sends the feedback email in the background as the user continues to use the site.
+        # the below function processes and sends the feedback
+        # email in the background as the user continues to use the site.
         send_feedback_email_task.delay(
             self.cleaned_data['email'], self.cleaned_data['message'])
