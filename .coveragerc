@@ -1,16 +1,9 @@
 [run]
 branch = True 
 omit = /home/kevin/Documents/LibraryApp/LibAppDjango/myenv/*
+       /home/kevin/Documents/LibraryApp/LibAppDjango/feedback/apps.py
        
 [report]
-# lines to exclude from consideration
-exclude_lines =
-    # Don't complain if non-runnable code isn't run:
-    if 0:
-    if __name__ == .__main__.:
-
-ignore_errors = True
-
 # a target coverage percentage
 fail_under = 90 
 

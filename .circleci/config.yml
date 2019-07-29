@@ -20,7 +20,7 @@ jobs:
             . myenv/bin/activate
             pip install tox
             
-      # Step 3: run linter and tests
+      # Step 3: run linter and tests (will all be run by tox command)
       - run:
           name: run tests
           command: |          

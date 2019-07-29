@@ -2,7 +2,7 @@
 # Docker Compose is an official tool that helps you manage your Docker containers 
 # by letting you define everything through a docker-compose.yml file.
 
-version: '3.7' # Specify version of Docker Compose
+version: '3.1' # Specify version of Docker Compose
 
 services:
   web:
