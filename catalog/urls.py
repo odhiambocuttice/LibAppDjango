@@ -21,16 +21,15 @@ urlpatterns += [
          name='all_borrowed'),
 ]
 
-# urlpatterns += [
-#     path('mybooks/', views.LoanedBooksByUserListView.as_view(),
-#          name='my_borrowed'),
-# ]
-
 urlpatterns += [
     path('book/<uuid:pk>/renew/', views.renew_book_librarian,
          name='renew-book-librarian'),
 ]
 
+urlpatterns += [
+    path('api/v1/books/', views.BookViewSet.as_view({'get': 'list'})),
+    path('api/v1/authors/', views.AuthorViewSet.as_view({'get': 'list'})),
+]
 
 # urlpatterns += [
 #     path('author/create/', views.AuthorCreate.as_view(), name='author_create'),
@@ -51,8 +50,8 @@ urlpatterns += [
 # ]
 
 # router = routers.DefaultRouter()
-# router.register('api/books', views.BookViewSet)
-# router.register('api/authors', views.AuthorViewSet)
+# router.register('api/v1/books', views.BookViewSet)
+# router.register('api/v1/authors', views.AuthorViewSet)
 
 # urlpatterns += [
 #     path('', include(router.urls)),
@@ -60,7 +59,20 @@ urlpatterns += [
 
 # ]
 
-# urlpatterns = [
-#     path('api/books/', views.BookViewSet.as_view()),
-#     path('api/authors/', views.AuthorViewSet.as_view()),
+# urlpatterns += [
+#     path('mybooks/', views.LoanedBooksByUserListView.as_view(),
+#          name='my_borrowed'),
+# ]
+
+# # # Routers provide an easy way of automatically determining the URL conf.
+# router = routers.DefaultRouter()
+# router.register(r'api/books', views.BookViewSet)
+
+# router.register(r'api/authors', views.AuthorViewSet)
+
+# # Wire up our API using automatic URL routing.
+# # Additionally, we include login URLs for the browsable API.
+# urlpatterns += [
+#     path(r'api/', include('rest_framework.urls', namespace='rest_framework'))
+
 # ]
