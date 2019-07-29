@@ -21,6 +21,8 @@ from .forms import RenewBookForm
 from rest_framework import viewsets
 from .models import BookInstance
 
+# views for the api
+
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
