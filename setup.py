@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='LibraryApp',
-    version='1.0.9',
+    version='1.2.4',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
@@ -27,9 +27,9 @@ setup(
     ],
     install_requires=[
         # Should only have the most basic
-        'Django==2.2.2',
-        'djangorestframework==3.9.4'
-
+        'Django>=1.11.22,<=2.2.2',
+        'djangorestframework==3.9.4',
+        'celery>=3.1.16'
     ],
     scripts=[
         "bin/locallibrary_app"

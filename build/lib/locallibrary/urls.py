@@ -18,23 +18,27 @@ from django.contrib import admin
 from django.urls import include
 from django.views.generic import RedirectView
 from django.urls import path
-# Use static() to add url mapping to serve static files during development (only)
+# Use static() to add url mapping to serve
+# static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
-from catalog.views import BookViewSet, AuthorViewSet
-from django.contrib.auth.models import User
-from catalog.models import Book
-from rest_framework import routers
-
+from feedback.views import FeedbackView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
-    path('',RedirectView.as_view(url='/catalog/', permanent=True)),
-     path('accounts/', include('django.contrib.auth.urls')),
-    #Add URL maps to redirect the base URL to our application
+    path('feedback/', FeedbackView.as_view(), name="feedback"),
+    path('', RedirectView.as_view(url='/catalog/', permanent=True)),
+    path('accounts/', include('django.contrib.auth.urls')),
+    # Add URL maps to redirect the base URL to our application
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+# Serving static files during development
+# if your STATIC_URL is defined as /static/,
+# you can add the above snippet
 
+# You don't need to run staticfiles when you're
+# running a development server and DEBUG is set to True.
 
+# Static and media files can be then served directly via the web process
