@@ -5,6 +5,7 @@ from django.urls import reverse
 from catalog.models import Book
 from catalog.models import Language
 from catalog.models import BookInstance
+from catalog.models import Genre
 from datetime import date
 from django.test import TestCase
 
@@ -64,6 +65,16 @@ class AuthorModelTest(TestCase):
         self.assertEqual(expected_object_name, str(author))
 
 
+class GenreModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Genre.objects.create(name='test_genre', id=1)
+
+    def test_str_is_equal_to_title(self):
+        genre = Genre.objects.get(id=1)
+        self.assertEqual(str(genre), genre.name)
+
+
 class BookModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -71,9 +82,12 @@ class BookModelTest(TestCase):
         author = Author.objects.get(id=1)
         Language.objects.create(name='Klingon')
         testLang = Language.objects.get(id=1)
-        Book.objects.create(title='TestyBook', author=author,
-                            summary='testysummary', isbn='872727727',
-                                    language=testLang)
+        Genre.objects.create(name='test_genre', id=1)
+        genres = Genre.objects.all()
+        bk = Book.objects.create(title='TestyBook', author=author,
+                                 summary='testysummary', isbn='872727727',
+                                 language=testLang)
+        bk.genre.set(genres)
         title = Book.objects.get(id=1)
         BookInstance.objects.create(book=title, imprint='testimprint',
                                     id=1)
@@ -99,14 +113,8 @@ class BookModelTest(TestCase):
         self.assertEqual(field_label, 'language')
 
     def test_str_is_equal_to_name(self):
-        example = Book.objects.get(pk=1)
+        example = Book.objects.get(id=1)
         self.assertEqual(str(example), example.title)
-
-    def test_get_absolute_url(self):
-        example_book = BookInstance.objects.get(id=1)
-        url = reverse('book-detail', args=(example_book.id,))
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
 
 
 class test_book_instance(TestCase):
