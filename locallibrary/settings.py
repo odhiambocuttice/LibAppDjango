@@ -188,7 +188,11 @@ USE_TZ = True # A boolean that specifies if datetimes will be timezone-aware by 
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join('/home/kevin/Documents/LibraryApp/LibAppDjango', 'static')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    'LibAppDjango/catalog/static',
+)
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 # The URL or named URL pattern where requests are redirected after login
