@@ -35,7 +35,7 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Serving static files during development
-# if your STATIC_URL is defined as /static/,
+# eg if your STATIC_URL is defined as /static/,
 # you can add the above snippet
 
 # You don't need to run staticfiles when you're

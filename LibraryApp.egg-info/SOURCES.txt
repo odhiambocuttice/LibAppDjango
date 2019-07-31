@@ -47,6 +47,7 @@ catalog/templates/catalog/bookinstance_list_borrowed_all.html
 catalog/templates/catalog/bookinstance_list_borrowed_user.html
 catalog/templates/catalog/periodic_email_body.html
 catalog/templates/catalog/periodic_email_subject.html
+catalog/templates/catalog/{{ book.get_absolute_url }}
 catalog/tests/__init__.py
 catalog/tests/test_forms.py
 catalog/tests/test_models.py
@@ -62,7 +63,7 @@ feedback/emails.py
 feedback/forms.py
 feedback/models.py
 feedback/tasks.py
-feedback/tests.py
+feedback/test_emails.py
 feedback/views.py
 feedback/__pycache__/__init__.cpython-36.pyc
 feedback/__pycache__/admin.cpython-36.pyc
@@ -70,6 +71,7 @@ feedback/__pycache__/emails.cpython-36.pyc
 feedback/__pycache__/forms.cpython-36.pyc
 feedback/__pycache__/models.cpython-36.pyc
 feedback/__pycache__/tasks.cpython-36.pyc
+feedback/__pycache__/test_emails.cpython-36-pytest-5.0.1.pyc
 feedback/__pycache__/views.cpython-36.pyc
 feedback/migrations/__init__.py
 feedback/migrations/__pycache__/__init__.cpython-36.pyc
