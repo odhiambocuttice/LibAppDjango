@@ -42,7 +42,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b26n4h!9rx@&i3f127v-h56+ga0j44
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # host/domain names that this Django site can serve
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','lib-app-django.herokuapp.com']
 
 
 # Application definition
