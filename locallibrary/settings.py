@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import django_heroku
 import os
 
 # pg 96
@@ -225,3 +226,6 @@ REST_FRAMEWORK = {
         'user': '1000/day'
     }
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
