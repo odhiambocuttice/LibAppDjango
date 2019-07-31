@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import django_heroku
 import os
 
 # pg 96
@@ -36,7 +35,7 @@ SECRET_KEY = 'b26n4h!9rx@&i3f127v-h56+ga0j44m%s$ij$e-ribzinq%@+9'
 DEBUG = True
 
 # host/domain names that this Django site can serve
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','django-lib.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
 
 
 # Application definition
@@ -62,7 +61,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -190,7 +188,6 @@ USE_TZ = True # A boolean that specifies if datetimes will be timezone-aware by 
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 # The URL or named URL pattern where requests are redirected after login
@@ -226,6 +223,3 @@ REST_FRAMEWORK = {
         'user': '1000/day'
     }
 }
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
