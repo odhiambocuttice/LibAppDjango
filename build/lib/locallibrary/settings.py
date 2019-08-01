@@ -29,13 +29,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # used to provide cryptographic signing, and should be set to a unique, unpredictable value.
 
 
-SECRET_KEY = 'b26n4h!9rx@&i3f127v-h56+ga0j44m%s$ij$e-ribzinq%@+9'
+# SECRET_KEY = 'b26n4h!9rx@&i3f127v-h56+ga0j44m%s$ij$e-ribzinq%@+9'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'b26n4h!9rx@&i3f127v-h56+ga0j44m%s$ij$e-ribzinq%@+9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = False
+
+# The value of the DEBUG will be True by default, but will only be False if the value of the DJANGO_DEBUG 
+# environment variable is set to False.
+
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # host/domain names that this Django site can serve
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','lib-app-django.herokuapp.com']
 
 
 # Application definition
@@ -61,6 +68,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,26 +112,24 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # A dictionary containing the settings for all databases to be used with Django.
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # The database backend to use
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # The name of the database to use.
-    }
-}
-# eg, for postgresql
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydatabase',
-#         'USER': 'mydatabaseuser',
-#         'PASSWORD': 'mypassword', # The password to use when connecting to the database
-#         'HOST': '127.0.0.1', # Which host to use when connecting to the database
-#         'PORT': '5432', # The port to use when connecting to the database
+#         'ENGINE': 'django.db.backends.sqlite3', # The database backend to use
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # The name of the database to use.
 #     }
 # }
+# eg, for postgresql
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'libdb',
+        'USER': 'libdb',
+        'PASSWORD': 'libdb', # The password to use when connecting to the database
+        'HOST': '127.0.0.1', # Which host to use when connecting to the database
+        'PORT': '5432', # The port to use when connecting to the database
+    }
+}
 
 
 # Password validation
@@ -188,6 +194,9 @@ USE_TZ = True # A boolean that specifies if datetimes will be timezone-aware by 
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 # The URL or named URL pattern where requests are redirected after login
@@ -223,3 +232,13 @@ REST_FRAMEWORK = {
         'user': '1000/day'
     }
 }
+
+# Heroku: Update database configuration from $DATABASE_URL.
+# We'll still be using SQLite during development because the 
+# DATABASE_URL environment variable will not be set on our development computer.
+
+# The value conn_max_age=500 makes the connection persistent
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)

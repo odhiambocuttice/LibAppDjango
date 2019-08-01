@@ -112,26 +112,24 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # A dictionary containing the settings for all databases to be used with Django.
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # The database backend to use
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # The name of the database to use.
-    }
-}
-# eg, for postgresql
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydatabase',
-#         'USER': 'mydatabaseuser',
-#         'PASSWORD': 'mypassword', # The password to use when connecting to the database
-#         'HOST': '127.0.0.1', # Which host to use when connecting to the database
-#         'PORT': '5432', # The port to use when connecting to the database
+#         'ENGINE': 'django.db.backends.sqlite3', # The database backend to use
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # The name of the database to use.
 #     }
 # }
+# eg, for postgresql
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'libdb',
+        'USER': 'libdb',
+        'PASSWORD': 'libdb', # The password to use when connecting to the database
+        'HOST': '127.0.0.1', # Which host to use when connecting to the database
+        'PORT': '5432', # The port to use when connecting to the database
+    }
+}
 
 
 # Password validation

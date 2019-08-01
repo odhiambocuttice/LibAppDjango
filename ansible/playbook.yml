@@ -1,0 +1,65 @@
+---
+
+- name: Deploy to server
+  hosts: all
+  vars_files:
+    - vars.yml
+  become: yes
+
+  tasks:
+    - name: Install System Packages
+      apt: name={{ system_packages }} update-cache=yes
+
+    - name: Copy .env file
+      copy:
+        src: /home/kevin/Documents/LibraryApp/LibAppDjango/.env
+        dest: /home/kevin/LibAppServ/
+
+    - name: Create Database
+      become_user: postgres
+      postgresql_db: name={{ POSTGRES_DB }}
+
+    - name: Create Database user
+      become_user: postgres
+      postgresql_user: db={{ POSTGRES_DB }} name={{ POSTGRES_USER }} password={{ POSTGRES_PASSWORD }}
+
+    - name: Install virtualenv
+      pip: name=virtualenv executable=pip3
+      
+    - name: Deploy from pip registry to virtualenv
+      pip: name=LibraryApp virtualenv=/home/kevin/LibAppServ/myenv
+           state: latest
+
+    - name: Pip install gunicorn
+      pip: name=gunicorn virtualenv=/home/kevin/LibAppServ/myenv
+
+    - name: Perform migration
+      shell:
+        cd LibAppServ
+        . myenv/bin/activate
+        todo_manage migrate
+
+    - name: Restart nginx to make changes
+      service:
+        name: nginx
+        state: restarted
+
+    - name: start gunicorn
+      shell: |
+        cd LibAppServ
+        . myenv/bin/activate
+        gunicorn --daemon --workers 3 --bind unix:/home/kevin/LibAppServ/LibAppServ.sock locallibrary.wsgi
+
+    - name: Allow UFW
+      ufw:
+        state: enabled
+
+    - name: Allow OpenSSH
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: Allow Nginx Full
+      ufw:
+        rule: allow
+        name: Nginx Full
