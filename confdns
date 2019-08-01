@@ -1,0 +1,14 @@
+	server {
+
+
+        server_name server.kevo.online;
+
+        location /static/ {
+                root /home/kevin/LibAppServ;
+}
+
+        location / {
+                include proxy_params;
+                proxy_pass http://unix:/home/kevin/LibAppServ/LibAppServ.sock;
+        }
+}
