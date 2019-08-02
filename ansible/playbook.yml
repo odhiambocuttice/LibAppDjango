@@ -7,6 +7,13 @@
   become: yes
 
   tasks:
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+
     - name: Install System Packages
       apt: name={{ system_packages }} update-cache=yes
 
@@ -28,35 +35,66 @@
       
     - name: Deploy from pip registry to virtualenv
       pip: 
-        name: LibraryApp==1.2.7
+        name: LibraryApp==1.3.0
         virtualenv: /home/kevin/LibAppServ/myenv
     
     - name: Pip install gunicorn
       pip: name=gunicorn virtualenv=/home/kevin/LibAppServ/myenv
 
+    - name: Pip install psycopg2
+      pip: name=psycopg2 virtualenv=/home/kevin/LibAppServ/myenv
+
+    - name: Pip install whitenoise
+      pip: name=whitenoise virtualenv=/home/kevin/LibAppServ/myenv
+
     - name: Perform migration
-      shell:
-        cd LibAppServ
+      shell: |
         . myenv/bin/activate
         docs_app migrate
+      args:
+        chdir: /home/kevin/LibAppServ/
 
     - name: Copy nginx conf file
       copy:
         src: /home/kevin/Documents/LibraryApp/LibAppDjango/confdns
-        dest: /etc/nginx/sites-available
+        dest: /etc/nginx/sites-available/
 
     - name: Create Symbolic link
       file:
         src: /etc/nginx/sites-available/confdns
         dest: /etc/nginx/sites-enabled/default
         state: link
+    
+    - name: Restart nginx to make changes
+      service:
+        name: nginx
+        state: restarted
 
     - name: start gunicorn
       shell: |
-        cd LibAppServ
         . myenv/bin/activate
         gunicorn --daemon --workers 3 --bind unix:/home/kevin/LibAppServ/LibAppServ.sock locallibrary.wsgi
+      args:
+        chdir: /home/kevin/LibAppServ/
 
+    - name: Add Certbot
+      apt_repository:
+        repo: 'ppa:certbot/certbot'
+        state: present
+        update-cache: yes
+
+    - name: Install python-certbot
+      apt: name=python-certbot-nginx state=present
+
+    # - name: Stop nginx to open port 80
+    #   service:
+    #     name: nginx
+    #     state: stopped
+    
+    # - name: Enable https
+    #   shell:
+    #     certbot --nginx -d server.kevo.online    
+        
     - name: Allow UFW
       ufw:
         state: enabled
