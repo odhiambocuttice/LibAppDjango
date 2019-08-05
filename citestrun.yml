@@ -36,4 +36,29 @@ jobs:
           command: |
             echo -e "[pypi]" >> ~/.pypirc
             echo -e "username = kevinlm" >> ~/.pypirc
-            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc  
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc      
+
+      - run:
+          name: create packages
+          command: |
+            python3 setup.py sdist bdist_wheel
+           # python setup.py sdist
+
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            pip install twine
+            twine upload dist/*
+      
+      - add_ssh_keys:
+          fingerprints:
+              - "9b:27:c9:d9:9f:ce:ea:fb:38:fd:3f:ea:f4:f8:5b:d4"
+     
+      - run:
+          name: executing ansible to a remote server
+          command: |
+            . venv/bin/activate
+            pip install ansible
+            ansible-playbook ansible/playbook.yml  -i ansible/hosts
+  

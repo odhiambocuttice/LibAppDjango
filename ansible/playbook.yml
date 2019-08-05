@@ -111,9 +111,9 @@
         rule: allow
         name: Nginx Full
 
-    # - name: Free port 80
-    #   shell: 
-    #     fuser -k 80/tcp
+    - name: Free port 80
+      shell: 
+        fuser -k 80/tcp
 
     - name: Restart nginx to make changes
       service:
