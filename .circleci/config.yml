@@ -66,4 +66,4 @@ jobs:
           command: |
             . myenv/bin/activate
             pip install ansible
-            ANSIBLE_HOST_KEY_CHECKING = False ansible-playbook -i ansible/playbook.yml ansible/hosts.yml 
+            ansible-playbook -i ansible/playbook.yml ansible/hosts.yml 
