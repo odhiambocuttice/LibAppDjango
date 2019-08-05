@@ -36,5 +36,34 @@ jobs:
             . myenv/bin/activate
             # Whenever we change the project dependencies we have to tell tox to recreate our environments 
             tox --recreate # Force tox to recreate the venv
-            
-        
+ ####################################################################################    
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = kevinlm" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc      
+
+      - run:
+          name: create packages
+          command: |
+            python3 setup.py sdist bdist_wheel
+           # python setup.py sdist
+
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            pip install twine
+            twine upload dist/*
+      
+      - add_ssh_keys:
+          fingerprints:
+              - "15:37:1a:a9:07:ab:cb:2a:fc:4f:fd:ca:b0:79:d9:a7"
+     
+      - run:
+          name: executing ansible to a remote server
+          command: |
+            . venv/bin/activate
+            pip install ansible
+            ansible-playbook ansible/playbook.yml  -i ansible/hosts
