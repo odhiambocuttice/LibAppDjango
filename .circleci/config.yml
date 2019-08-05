@@ -10,6 +10,7 @@ jobs:
           POSTGRES_USER: libdb
           POSTGRES_DB: libdb
           POSTGRES_PASSWORD: libdb
+          ANSIBLE_HOST_KEY_CHECKING: False
 
     environment:
       -ANSIBLE_HOST_KEY_CHECKING: False
