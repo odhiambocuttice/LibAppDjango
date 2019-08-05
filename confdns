@@ -1,7 +1,7 @@
 server {
-
         listen 80;
-        server_name server.kevo.online;
+        listen [::]:80;
+        server_name kevo.online www.kevo.online;
 
         location /static/ {
                 root /home/kevin/LibAppServ;
@@ -11,4 +11,17 @@ server {
                 include proxy_params;
                 proxy_pass http://unix:/home/kevin/LibAppServ/LibAppServ.sock;
         }
+
+}
+
+server {
+    if ($host = kevo.online) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        listen [::]:80;
+        server_name kevo.online www.kevo.online;
+    return 404; # managed by Certbot
 }

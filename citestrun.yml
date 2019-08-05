@@ -31,4 +31,9 @@ jobs:
             # Whenever we change the project dependencies we have to tell tox to recreate our environments 
             tox --recreate # Force tox to recreate the venv
             
-        
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = kevinlm" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc  

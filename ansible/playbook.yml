@@ -7,15 +7,16 @@
   become: yes
 
   tasks:
+    
+    - name: Install System Packages
+      apt: name={{ system_packages }} update-cache=yes
+
     - name: ensure nginx is at the latest version
       apt: name=nginx state=latest
     - name: start nginx
       service:
           name: nginx
           state: started
-
-    - name: Install System Packages
-      apt: name={{ system_packages }} update-cache=yes
 
     - name: Copy .env file
       copy:
@@ -35,7 +36,7 @@
       
     - name: Deploy from pip registry to virtualenv
       pip: 
-        name: LibraryApp==1.3.0
+        name: LibraryApp==1.3.1
         virtualenv: /home/kevin/LibAppServ/myenv
     
     - name: Pip install gunicorn
@@ -86,14 +87,15 @@
     - name: Install python-certbot
       apt: name=python-certbot-nginx state=present
 
-    # - name: Stop nginx to open port 80
-    #   service:
-    #     name: nginx
-    #     state: stopped
+    - name: Stop nginx to open port 80
+      service:
+        name: nginx
+        state: stopped
     
     # - name: Enable https
     #   shell:
-    #     certbot --nginx -d server.kevo.online    
+    #     certbot --nginx --noninteractive --agree-tos --email kithinjimkevin@gmail.com -d kevo.online -d www.kevo.online    
+    #   become: yes
         
     - name: Allow UFW
       ufw:
@@ -108,6 +110,10 @@
       ufw:
         rule: allow
         name: Nginx Full
+
+    # - name: Free port 80
+    #   shell: 
+    #     fuser -k 80/tcp
 
     - name: Restart nginx to make changes
       service:
