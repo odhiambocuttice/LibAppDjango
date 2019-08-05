@@ -12,8 +12,9 @@ jobs:
           POSTGRES_PASSWORD: libdb
 
     environment:
-      - ANSIBLE_HOST_KEY_CHECKING: False
-    working_directory: ~/repo
+      -ANSIBLE_HOST_KEY_CHECKING: False
+    
+      working_directory: ~/repo
 
     steps:
       # Step 1: obtain repo from GitHub
@@ -36,7 +37,7 @@ jobs:
             . myenv/bin/activate
             # Whenever we change the project dependencies we have to tell tox to recreate our environments 
             tox --recreate # Force tox to recreate the venv
- ####################################################################################    
+
       - run:
           name: init .pypirc
           command: |
@@ -66,4 +67,4 @@ jobs:
           command: |
             . myenv/bin/activate
             pip install ansible
-            ansible-playbook -i ansible/playbook.yml ansible/hosts.yml 
+            ansible-playbook -i ansible/hosts.yml ansible/playbook.yml
