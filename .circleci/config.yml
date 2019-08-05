@@ -64,6 +64,6 @@ jobs:
       - run:
           name: executing ansible to a remote server
           command: |
-            . venv/bin/activate
+            . myenv/bin/activate
             pip install ansible
             ansible-playbook ansible/playbook.yml  -i ansible/hosts
